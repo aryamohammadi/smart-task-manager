@@ -2,7 +2,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
-const User = require('../models/User'); // Ensure the User model path is correct
+const User = require('../models/User');
+const authMiddleware = require('../middleware/authMiddleware'); // Import the middleware
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.post(
   '/register',
   [
     body('username').isString().withMessage('Username is required'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -22,23 +23,20 @@ router.post(
     const { username, password } = req.body;
 
     try {
-      // Check if user already exists
       const existingUser = await User.findOne({ username });
       if (existingUser) {
         return res.status(400).json({ message: 'User already exists' });
       }
 
-      // Hash password
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Create a new user
       const newUser = new User({ username, password: hashedPassword });
       await newUser.save();
 
-      // Create and send JWT token
       const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
       res.status(201).json({ token });
     } catch (error) {
+      console.error('Error during registration:', error);
       res.status(500).json({ message: 'Server error' });
     }
   }
@@ -80,5 +78,20 @@ router.post(
     }
   }
 );
+//authentication
+router.get('/profile', authMiddleware, async (req, res) => {
+  try {
+    // Find the user by ID stored in req.user (set by authMiddleware)
+    const user = await User.findById(req.user);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(user); // Respond with the user profile
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 module.exports = router;

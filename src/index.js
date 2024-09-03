@@ -1,26 +1,21 @@
+require('dotenv').config(); // Add this line to load environment variables from .env
+
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-require('dotenv').config();
+const cors = require('cors');
+const authRoutes = require('./routes/auth'); // Import the auth routes
 
 const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Route setup
+app.use('/api/auth', authRoutes); // Ensure this path matches your frontend and Postman URL
+
 const PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(bodyParser.json());
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected successfully'))
-  .catch(err => console.error('MongoDB connection error:', err));
-
-// Routes
-const authRoutes = require('./routes/auth'); // Ensure this path is correct
-app.use('/api/auth', authRoutes);
-
-app.get('/', (req, res) => {
-  res.send('Hello, world! This is the Smart Task Manager backend.');
-});
+  .catch(err => console.log('MongoDB connection error:', err));
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
