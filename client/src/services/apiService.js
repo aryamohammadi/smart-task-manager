@@ -9,7 +9,7 @@ export const registerUser = async (userData) => {
     return response.data;
   } catch (error) {
     console.error('Error registering user:', error);
-    throw error;
+    throw error; // Ensure the error is being thrown to catch it properly in the form
   }
 };
 
@@ -20,6 +20,22 @@ export const loginUser = async (credentials) => {
     return response.data;
   } catch (error) {
     console.error('Error logging in user:', error);
+    throw error;
+  }
+};
+
+// Function to get user profile (protected route)
+export const getUserProfile = async () => {
+  try {
+    const token = localStorage.getItem('token'); // Get the token from localStorage
+    const response = await axios.get(`${API_BASE_URL}/auth/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
     throw error;
   }
 };

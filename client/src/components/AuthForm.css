@@ -1,0 +1,80 @@
+/* Enhanced styles with animations */
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0; /* Background color for the page */
+    transition: background-color 0.5s ease;
+  }
+  
+  .auth-paper {
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out; /* Added fade-in animation */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .auth-paper:hover {
+    transform: translateY(-10px); /* Subtle hover effect */
+  }
+  
+  .auth-title {
+    color: #333;
+    animation: slideDown 0.8s ease; /* Sliding down animation */
+  }
+  
+  .auth-input {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .auth-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  }
+  
+  .auth-button {
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  .auth-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .auth-toggle-button {
+    color: #007bff;
+    transition: color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .auth-toggle-button:hover {
+    color: #0056b3;
+  }
+  
+  /* Keyframes for animations */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
