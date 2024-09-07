@@ -1,0 +1,21 @@
+/* src/components/Dashboard.css */
+.container {
+    margin-top: 20px;
+  }
+  
+  .task-list {
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .new-task-input {
+    margin-right: 10px;
+  }
+  
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  

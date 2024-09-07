@@ -1,80 +1,100 @@
 /* Enhanced styles with animations */
 .auth-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0; /* Background color for the page */
-    transition: background-color 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3); /* Gradient background for a more dynamic feel */
+  transition: background-color 0.5s ease;
+  padding: 20px;
+}
+
+.auth-paper {
+  padding: 30px;
+  animation: fadeIn 1s ease-in-out;
+  border-radius: 20px; /* Increased border radius for a softer, more modern look */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Enhanced shadow for a deeper effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition to shadow */
+  background-color: #ffffff; /* Background color for the form container */
+}
+
+.auth-paper:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); /* Enhanced hover effect with shadow */
+}
+
+.auth-title {
+  color: #333;
+  font-family: 'Poppins', sans-serif; /* Use a modern, clean font */
+  font-weight: 600;
+  animation: slideDown 0.8s ease;
+  margin-bottom: 20px;
+}
+
+.auth-input {
+  border-radius: 8px; /* Rounded corners for inputs */
+  border: 1px solid #ddd;
+  padding: 10px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 15px; /* Space out the inputs */
+}
+
+.auth-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  outline: none; /* Remove default outline */
+}
+
+.auth-button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px; /* Increase padding for a more comfortable button */
+  font-size: 16px; /* Slightly larger font for better readability */
+  border-radius: 8px; /* Rounded corners for the button */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Add transform effect */
+  margin-top: 20px; /* Space between button and input fields */
+}
+
+.auth-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Scale effect on hover for better interactivity */
+}
+
+.auth-toggle-button {
+  color: #007bff;
+  transition: color 0.3s ease, transform 0.3s ease; /* Add transform effect */
+  cursor: pointer;
+  margin-top: 15px; /* Add space between toggle button and form */
+  background: none;
+  border: none;
+  font-size: 16px;
+}
+
+.auth-toggle-button:hover {
+  color: #0056b3;
+  transform: translateY(-2px); /* Subtle move effect on hover */
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  .auth-paper {
-    padding: 20px;
-    animation: fadeIn 1s ease-in-out; /* Added fade-in animation */
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .auth-paper:hover {
-    transform: translateY(-10px); /* Subtle hover effect */
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
   }
-  
-  .auth-title {
-    color: #333;
-    animation: slideDown 0.8s ease; /* Sliding down animation */
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  .auth-input {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .auth-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-  }
-  
-  .auth-button {
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.3s ease;
-  }
-  
-  .auth-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .auth-toggle-button {
-    color: #007bff;
-    transition: color 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .auth-toggle-button:hover {
-    color: #0056b3;
-  }
-  
-  /* Keyframes for animations */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes slideDown {
-    0% {
-      transform: translateY(-20px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
+}
