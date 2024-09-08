@@ -1,5 +1,6 @@
-require('dotenv').config({ path: '../.env' });  // Load environment variables
-
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config(); // Load environment variables only in development
+}
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
