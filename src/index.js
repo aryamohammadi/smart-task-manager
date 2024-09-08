@@ -1,11 +1,15 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config(); // Load environment variables only in development
-}
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const authRoutes = require('./routes/auth'); // Import the auth routes
-const taskRoutes = require('./routes/task'); // Import task routes
+
+// Load environment variables in development mode
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+// Import routes
+const authRoutes = require('./routes/auth'); 
+const taskRoutes = require('./routes/task'); 
 
 const app = express();
 app.use(cors());
@@ -13,7 +17,7 @@ app.use(express.json());
 
 // Route setup for auth
 app.use('/api/auth', authRoutes);
-app.use('/api/tasks', taskRoutes); // Use task routes
+app.use('/api/tasks', taskRoutes);
 
 // Root route
 app.get('/', (req, res) => {
